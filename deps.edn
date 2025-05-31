@@ -27,7 +27,16 @@
         ;; org.slf4j/slf4j-nop {:mvn/version "2.0.16"}
         }
  :aliases
- {:dev-mcp
+ {:uberjar
+  {:extra-paths ["dev"]           
+   :extra-deps {io.github.clojure/tools.build {:git/tag "v0.9.2" :git/sha "fe6b140"}
+                jakarta.servlet/jakarta.servlet-api {:mvn/version "6.1.0"}
+                org.eclipse.jetty/jetty-server {:mvn/version "11.0.20"}
+                org.eclipse.jetty/jetty-servlet {:mvn/version "11.0.20"}}
+   :ns-default build
+   :exec-fn build/uberjar}
+
+  :dev-mcp
   {:extra-deps {ch.qos.logback/logback-classic {:mvn/version "1.4.14"}}
    :extra-paths ["dev" "test"]
    :exec-fn clojure-mcp.main/start-mcp-server
